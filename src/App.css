@@ -1,3 +1,7 @@
+.navbar {
+  display: flex;
+  justify-content: space-around;
+}
 .contact-form {
   display:flex;
   flex-direction: column;

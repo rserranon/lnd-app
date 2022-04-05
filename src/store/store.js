@@ -8,12 +8,13 @@ export class Store {
 
     // observable state attributes
 
-    currentPage = ''
+    currentPage = 'nada'
     error = ''
     connected = false
 
     // Actions
-    gotoConect = () => (this.currentPage = 'connect')
+    gotoHome = () => (this.currentPage = '')
+    gotoConnect = () => (this.currentPage = 'connect')
 
     clearError = () => (this.error = '')
 
