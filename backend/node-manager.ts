@@ -41,24 +41,25 @@ class NodeManager extends EventEmitter {
         macaroon, // hex encoded macaroon
       });
 
-      // verify we have permission get node info
+    //   verify we have permission get node info
       const { identityPubkey: pubkey } = await rpc.getInfo();
-
+      console.log(`Pubkey: ${pubkey}`)
+      console.log(await rpc.getInfo())
       // verify we have permission to get channel balances
-      await rpc.channelBalance();
+      // await rpc.channelBalance();
 
       // verify we can sign a message
-      const msg = Buffer.from('authorization test').toString('base64');
-      const { signature } = await rpc.signMessage({ msg });
+      // const msg = Buffer.from('authorization test').toString('base64');
+      // const { signature } = await rpc.signMessage({ msg });
 
       // verify we have permission to verify a message
-      await rpc.verifyMessage({ msg, signature });
+      // await rpc.verifyMessage({ msg, signature });
 
       // verify we have permissions to create a 1sat invoice
-      const { rHash } = await rpc.addInvoice({ value: '1' });
+      // const { rHash } = await rpc.addInvoice({ value: '1' });
 
       // verify we have permission to lookup invoices
-      await rpc.lookupInvoice({ rHash });
+      // await rpc.lookupInvoice({ rHash });
 
       // listen for payments from LND
     //   this.listenForPayments(rpc, pubkey);
