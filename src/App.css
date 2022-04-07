@@ -31,3 +31,14 @@
 .button-submit {
   color:  blue;
 }
+
+.pane {
+  overflow-y: auto;
+  padding: 40px;
+}
+
+.editor {
+  width: 80%;
+  height: 100vh;
+}
+
