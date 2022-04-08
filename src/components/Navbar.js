@@ -8,8 +8,9 @@ function Navbar () {
     return(
         <div className="navbar">
             <img src="logo192.png" alt="Logo" />
+            <h3>{store.bounties.length}</h3>
             <h2 onClick={store.gotoConnect} style={{cursor: "pointer"}}>Connect</h2>
-            <h2 onClick={store.createNewBounty} style={{cursor: "pointer"}}>Create Bounty</h2>
+            <h2 onClick={store.gotoBounty} style={{cursor: "pointer"}}>Create Bounty</h2>
         </div>
     )
 }

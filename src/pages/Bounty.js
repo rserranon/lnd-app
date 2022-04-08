@@ -22,6 +22,7 @@ function Bounty () {
     const handleSubmit = useCallback(
         async (event) => {
           event.preventDefault()
+          store.createNewBounty()
           store.bounties[store.currentBounty].title = title
           store.bounties[store.currentBounty].body = body
 
@@ -32,6 +33,12 @@ function Bounty () {
         },
         [title, body, store],
       );
+
+      const onCancel = (event) => {
+        event.preventDefault()
+        alert("Do you really want to cancel an go to Home?")
+        store.gotoHome()
+      }
 
 return (
     <section className="pane editor">
@@ -55,7 +62,7 @@ return (
                 heightUnits="vh"
             />
             <div className='buttons'>
-              <button className="button-cancel" onClick={store.gotoHome}>
+              <button className="button-cancel" onClick={event => onCancel(event)}>
                 Cancel
               </button>
               <button className="button-submit" type="submit">

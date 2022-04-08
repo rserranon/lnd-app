@@ -15,7 +15,13 @@ function Connect  () {
       store.connectToLnd(host, cert, macaroon);
     },
     [host, cert, macaroon, store],
-  );
+  )
+
+  const onCancel = (event) => {
+    event.preventDefault()
+    alert("Do you really want to cancel an go to Home?")
+    store.gotoHome()
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -60,7 +66,7 @@ function Connect  () {
               invoices, and sign/verify messages.
             </p>
             <div className='buttons'>
-              <button className="button-cancel" onClick={store.gotoHome}>
+              <button className="button-cancel" onClick={event => onCancel(event)}>
                 Cancel
               </button>
               <button className="button-submit" type="submit">

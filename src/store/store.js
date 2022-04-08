@@ -9,7 +9,7 @@ export class Store {
     }
 
     // observable state attributes
-    currentPage = ''
+    currentPage = 'bounties'
     error = ''
     connected = false
 
@@ -29,8 +29,9 @@ export class Store {
     }
 
     // Actions
-    gotoHome = () => (this.currentPage = '')
+    gotoHome = () => (this.currentPage = 'bounties')
     gotoConnect = () => (this.currentPage = 'connect')
+    gotoBounty = () => (this.currentPage = 'bounty')
 
     clearError = () => (this.error = '')
 
