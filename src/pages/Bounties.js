@@ -1,15 +1,44 @@
 import { observer } from "mobx-react-lite"
-import React from "react"
-
+import React, {useMemo} from "react"
+import Showdown from 'showdown'
 import { useStore } from "../store/Provider"
+const buble = require('buble');
+
+const MarkdownToJSX = ({ md }) => {
+    //if (typeof md !== 'string') return null;
+    const makeComponent = useMemo(() => {
+      const converter = new Showdown.Converter({
+        tables: true,
+        simplifiedAutoLink: true,
+        strikethrough: true,
+        tasklists: true,
+      });
+      // wrap converted HTML in closures
+      //   const html = <>${converter.makeHtml(md)}</>
+      const html = converter.makeHtml(md)
+      const htmlWrapped = '<>'.concat(html).concat('</>')
+      const code = buble.transform(htmlWrapped).code;
+      // eslint-disable-next-line
+      const makeComponent = Function('React', 'return ' + code)
+      console.log(makeComponent)
+      return makeComponent;
+    }, [md]);
+  
+    return makeComponent(React);
+  };
 
 function Bounties() {
     const store = useStore()
 
     return (
-        <ul>
-        {store.bounties.map( bounty => (<li key={bounty.id}>{bounty.title}</li> ))}
-        </ul>
+        store.bounties.map( bounty => (
+            <div key={bounty.id}>
+                <h2>{bounty.title}</h2> 
+                <div className="bounties">
+                    <MarkdownToJSX md={bounty.body}/>
+                </div>
+            </div>
+        ))
     )
 }
 

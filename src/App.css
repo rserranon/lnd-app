@@ -42,3 +42,9 @@
   height: 100vh;
 }
 
+.bounties {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+}
+
