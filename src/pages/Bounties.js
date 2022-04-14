@@ -5,7 +5,7 @@ import { useStore } from "../store/Provider"
 const buble = require('buble');
 
 const MarkdownToJSX = ({ md }) => {
-    //if (typeof md !== 'string') return null;
+    // if (typeof md !== 'string') return null;
     const makeComponent = useMemo(() => {
       const converter = new Showdown.Converter({
         tables: true,
@@ -32,9 +32,9 @@ function Bounties() {
 
     return (
         store.bounties.map( bounty => (
-            <div key={bounty.id}>
+            <div className="bounties" key={bounty.id}>
                 <h2>{bounty.title}</h2> 
-                <div className="bounties">
+                <div >
                     <MarkdownToJSX md={bounty.body}/>
                 </div>
             </div>

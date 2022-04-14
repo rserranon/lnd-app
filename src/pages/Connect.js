@@ -1,5 +1,13 @@
 import React, { useCallback, useState } from 'react';
 import { observer } from 'mobx-react-lite';
+import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
+import "primereact/resources/primereact.min.css";                  //core css
+import "primeicons/primeicons.css"; 
+import { InputText } from 'primereact/inputtext';
+import { InputTextarea } from 'primereact/inputtextarea';
+import { Button } from 'primereact/button';
+
+
 import { useStore } from '../store/Provider';
 
 function Connect  () {
@@ -27,35 +35,41 @@ function Connect  () {
     <form onSubmit={handleSubmit}>
         <h2>Connect Node</h2>
           <div className='contact-form'>
-            <label>LND Host</label>
-            <input
-              className='inputs'
-              type="text"
-              required
-              value={host}
-              placeholder="127.0.0.1:10001"
-              onChange={e => setHost(e.target.value)}
-            />
-            <label>TLS Certificate</label>
-            <textarea
-              className='inputs'
-              required
-              rows={9}
-              name="certificate"
-              value={cert}
-              placeholder="HEX encoded. Ex: 4942416749514259476c4c7a577a6e6f4550564158..."
-              onChange={e => setCert(e.target.value)}
-            />
-            <label>Macaroon</label>
-            <textarea
-              className='inputs'
-              required
-              rows={3}
-              name="macaroon"
-              value={macaroon}
-              placeholder="HEX encoded. Ex: 0201036c6e64024f030a10e9366194c29d06acac69..."
-              onChange={e => setMacaroon(e.target.value)}
-            />
+            <span className="p-float-label">
+              <InputText 
+                id="in" 
+                required
+                value={host} 
+                onChange={e => setHost(e.target.value)} />
+              <label htmlFor="in">LND Host</label>
+            </span>
+            <br/>
+            <br/>
+            <span className="p-float-label">
+              <InputTextarea 
+                id="certificate"
+                rows={11} 
+                cols={150} 
+                required
+                value={cert} 
+                onChange={(event) => setCert(event.target.value)} 
+                placeholder="HEX encoded. Ex: 4942416749514259476c4c7a577a6e6f4550564158..."
+                />
+              <label htmlFor="certificate">TLS Certificate</label>
+            </span>
+            <br/>
+            <span className="p-float-label">
+              <InputTextarea
+                id="macaroon" 
+                rows={4} 
+                cols={150} 
+                required
+                value={macaroon} 
+                onChange={(event) => setMacaroon(event.target.value)} 
+                placeholder="HEX encoded. Ex: 0201036c6e64024f030a10e9366194c29d06acac69..."
+                />
+              <label htmlFor="macaroon">Macaroon</label>
+            </span>
             <p className="text-muted">
               Open a Terminal and enter{' '}
               <code className='code'>
@@ -66,12 +80,16 @@ function Connect  () {
               invoices, and sign/verify messages.
             </p>
             <div className='buttons'>
-              <button className="button-cancel" onClick={event => onCancel(event)}>
-                Cancel
-              </button>
-              <button className="button-submit" type="submit">
-                Submit
-              </button>
+            <Button 
+              label="Cancel" 
+              className="p-button-danger" 
+              onClick={event => onCancel(event)}
+            />
+            <Button 
+              label="Connect"
+              type="submit" 
+              className="p-button-success" 
+            />
             </div>
           </div>    
     </form>
