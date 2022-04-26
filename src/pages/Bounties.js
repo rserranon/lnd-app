@@ -5,7 +5,7 @@ import { useStore } from "../store/Provider"
 const buble = require('buble');
 
 const MarkdownToJSX = ({ md }) => {
-    //if (typeof md !== 'string') return null;
+    // if (typeof md !== 'string') return null;
     const makeComponent = useMemo(() => {
       const converter = new Showdown.Converter({
         tables: true,

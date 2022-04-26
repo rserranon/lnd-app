@@ -3,12 +3,17 @@ import React, { useState, useCallback } from "react"
 import ReactMde from "react-mde"
 import Showdown from 'showdown'
 import "react-mde/lib/styles/css/react-mde-all.css";
+import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
+import "primereact/resources/primereact.min.css";                  //core css
+import "primeicons/primeicons.css"; 
+import { InputText } from 'primereact/inputtext';
+import { Button } from 'primereact/button';
 
 import {useStore} from './../store/Provider'
 
 function Bounty () {
     const [selectedTab, setSelectedTab] = useState("write")
-    const [title, setTitle] = useState("Type your title here...")
+    const [title, setTitle] = useState("")
     const [body, setBody] = useState("# Type your markdown bounty  here...")
     const store = useStore()
 
@@ -43,13 +48,16 @@ function Bounty () {
 return (
     <section className="pane editor">
         <form onSubmit={handleSubmit}>
-            <input
-             className='input-pane-editor'
-             type="text"
-             required
-             value={title}
-             onChange={e => setTitle(e.target.value)}
-            />
+            <span className="p-float-label">
+              <InputText 
+                id="title" 
+                size="80"
+                required
+                value={title} 
+                onChange={e => setTitle(e.target.value)} />
+              <label htmlFor="title">Bounty Title</label>
+            </span>
+            <br />
             <ReactMde
                 value={body}
                 onChange={setBody}
@@ -58,16 +66,21 @@ return (
                 generateMarkdownPreview={(markdown) =>
                     Promise.resolve(converter.makeHtml(markdown))
                 }
-                minEditorHeight={80}
+                minEditorHeight={50}
                 heightUnits="vh"
             />
-            <div className='buttons'>
-              <button className="button-cancel" onClick={event => onCancel(event)}>
-                Cancel
-              </button>
-              <button className="button-submit" type="submit">
-                Submit
-              </button>
+            <br />
+            <div className="buttons">
+              <Button 
+                  label="Cancel" 
+                  className="p-button-danger" 
+                  onClick={event => onCancel(event)}
+              />
+              <Button 
+                  label="Save"
+                  type="submit" 
+                  className="p-button-success" 
+              />
             </div>
         </form>
     </section>
